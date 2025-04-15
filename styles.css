@@ -88,17 +88,22 @@ iframe {
 .tv-container {
     position: relative;
     padding: 15px;
-    background-color: #555;
+    background: linear-gradient(135deg, #e8c87d 0%, #ebe6d1 100%); /* 添加渐变背景 */
     border-radius: 15px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-    margin: 15px 0;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6), 
+    inset 0 0 10px rgba(209, 197, 145, 0.1); /* 内外阴影结合 */
+    margin: 15px auto;
+    margin: 15px auto; /* 水平居中 */
+    max-width: 800px; /* 限制最大宽度 */
 }
 
 .tv-frame {
-    width: 600px;
-    height: 450px;
-    background-color: #000;
-    border: 8px solid #222;
+    /* 使用相对单位，让宽度根据屏幕宽度调整 */
+    width: 40%; 
+    /* 保持宽高比，这里假设宽高比是 4:3 */
+    height: 20%; 
+    background: radial-gradient(135deg, #e8c87d 0%, #ebe6d1 100%); /* 径向渐变背景 */
+    
     border-radius: 8px;
     overflow: hidden;
     position: relative;
@@ -106,6 +111,8 @@ iframe {
     display: flex; /* 使用 Flexbox 布局 */
     justify-content: center; /* 水平居中 */
     align-items: center; /* 垂直居中 */
+     
+ 
 }
 
 .carousel-container {
@@ -120,11 +127,9 @@ iframe {
 
 .carousel {
     display: flex;
-    transition: transform 0.5s ease-in-out;
-    width: 100%; /* 确保 carousel 宽度撑满容器 */
-    height: 100%; /* 确保 carousel 高度撑满容器 */
-    
-   
+    transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1); /* 更流畅的过渡动画 */
+    will-change: transform; /* 提高动画性能 */
+
 }
 
 .carousel img {
@@ -133,21 +138,23 @@ iframe {
    height: 100%; 
     object-fit: contain; /* 确保图片比例正确并填满容器 */
     flex-shrink: 0; /* 防止图片被压缩 */
-    
+    transition: all 0.3s ease; /* 图片过渡效果 */
+    border-radius: 8px; /* 图片圆角 */
 }
 
 .carousel-controls {
     position: absolute;
-    bottom: 20px;
+    bottom: 8%;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    gap: 10px;
+    gap: 20px;
+    z-index: 10;
 }
 
 .carousel-controls button {
     /* 基础样式 */
-    padding: 12px 24px;
+    padding: 6px 12px;
     font-size: 16px;
     font-weight: bold;
     text-transform: uppercase;
@@ -173,4 +180,33 @@ iframe {
 .carousel-controls button:active {
     transform: translateY(1px);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+     
+/* 媒体查询，针对移动端设备 */
+@media (max-width: 768px) {
+        .tv-container {
+            padding: 10px;
+            border-radius: 10px;
+        }
+    
+        .tv-frame {
+            width: 90vw; /* 使用视口宽度，让电视框自适应屏幕 */
+            height: 50vh; /* 使用视口高度，让电视框自适应屏幕 */
+            border: 5px solid #222;
+            border-radius: 5px;
+        }
+    
+        .carousel {
+            display: flex;
+            transition: transform 0.5s ease - in - out;
+            justify-content: center;
+            align-items: center;
+        }
+    
+        .carousel img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+    }
 }
